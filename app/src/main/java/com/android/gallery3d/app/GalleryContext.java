@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.os.Looper;
 
 import com.android.gallery3d.data.DataManager;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.util.ThreadPool;
 
 public interface GalleryContext {
@@ -31,4 +32,5 @@ public interface GalleryContext {
     public Looper getMainLooper();
     public Resources getResources();
     public ThreadPool getThreadPool();
+    public FaceManager getFaceManager();
 }

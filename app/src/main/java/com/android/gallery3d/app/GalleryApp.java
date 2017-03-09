@@ -24,6 +24,7 @@ import android.os.Looper;
 import com.android.gallery3d.data.DataManager;
 import com.android.gallery3d.data.DownloadCache;
 import com.android.gallery3d.data.ImageCacheService;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.util.ThreadPool;
 
 public interface GalleryApp {
@@ -37,4 +38,5 @@ public interface GalleryApp {
     public Looper getMainLooper();
     public ContentResolver getContentResolver();
     public Resources getResources();
+    public FaceManager getFaceManager();
 }

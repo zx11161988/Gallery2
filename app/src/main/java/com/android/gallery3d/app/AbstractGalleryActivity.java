@@ -42,6 +42,7 @@ import com.android.gallery3d.R;
 import com.android.gallery3d.common.ApiHelper;
 import com.android.gallery3d.data.DataManager;
 import com.android.gallery3d.data.MediaItem;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.filtershow.cache.ImageLoader;
 import com.android.gallery3d.ui.GLRoot;
 import com.android.gallery3d.ui.GLRootView;
@@ -364,5 +365,10 @@ public class AbstractGalleryActivity extends Activity implements GalleryContext 
         } catch (FileNotFoundException fnfe) {
             Log.e(TAG, "Error printing an image", fnfe);
         }
+    }
+
+    @Override
+    public FaceManager getFaceManager() {
+        return ((GalleryApp) getApplication()).getFaceManager();
     }
 }

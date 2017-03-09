@@ -23,10 +23,10 @@ import android.os.AsyncTask;
 import com.android.gallery3d.data.DataManager;
 import com.android.gallery3d.data.DownloadCache;
 import com.android.gallery3d.data.ImageCacheService;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.gadget.WidgetUtils;
 import com.android.gallery3d.picasasource.PicasaSource;
 import com.android.gallery3d.util.GalleryUtils;
-import com.android.gallery3d.util.LightCycleHelper;
 import com.android.gallery3d.util.ThreadPool;
 import com.android.gallery3d.util.UsageStatistics;
 
@@ -66,7 +66,6 @@ public class GalleryAppImpl extends Application implements GalleryApp {
         }
         return mDataManager;
     }
-
 
     @Override
     public ImageCacheService getImageCacheService() {
@@ -110,5 +109,14 @@ public class GalleryAppImpl extends Application implements GalleryApp {
             Class.forName(AsyncTask.class.getName());
         } catch (ClassNotFoundException e) {
         }
+    }
+
+    private FaceManager mFaceManager;
+    @Override
+    public FaceManager getFaceManager(){
+        if (mFaceManager == null) {
+            mFaceManager = new FaceManager(this);
+        }
+        return mFaceManager;
     }
 }

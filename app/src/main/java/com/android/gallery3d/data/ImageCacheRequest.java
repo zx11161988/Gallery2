@@ -22,6 +22,7 @@ import android.graphics.BitmapFactory;
 import com.android.gallery3d.app.GalleryApp;
 import com.android.gallery3d.common.BitmapUtils;
 import com.android.gallery3d.data.BytesBufferPool.BytesBuffer;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.util.ThreadPool.Job;
 import com.android.gallery3d.util.ThreadPool.JobContext;
 
@@ -55,7 +56,13 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
 
         BytesBuffer buffer = MediaItem.getBytesBufferPool().get();
         try {
-            boolean found = cacheService.getImageData(mPath, mTimeModified, mType, buffer);
+            boolean found = false;
+            if (mType == MediaItem.TYPE_MICROTHUMBNAIL && FaceManager.SUPPORT_FACE) {
+                mApplication.getFaceManager();
+            } else {
+                found = cacheService.getImageData(mPath, mTimeModified, mType, buffer);
+            }
+
             if (jc.isCancelled()) return null;
             if (found) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -85,6 +92,7 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
         }
 
         if (mType == MediaItem.TYPE_MICROTHUMBNAIL) {
+
             bitmap = BitmapUtils.resizeAndCropCenter(bitmap, mTargetSize, true);
         } else {
             bitmap = BitmapUtils.resizeDownBySideLength(bitmap, mTargetSize, true);
