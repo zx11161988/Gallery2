@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import com.android.gallery3d.app.GalleryApp;
 import com.android.gallery3d.common.BitmapUtils;
 import com.android.gallery3d.data.BytesBufferPool.BytesBuffer;
-import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.util.ThreadPool.Job;
 import com.android.gallery3d.util.ThreadPool.JobContext;
 
@@ -30,7 +29,7 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
     private static final String TAG = "ImageCacheRequest";
 
     protected GalleryApp mApplication;
-    private Path mPath;
+    protected Path mPath;
     private int mType;
     private int mTargetSize;
     private long mTimeModified;
@@ -56,13 +55,7 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
 
         BytesBuffer buffer = MediaItem.getBytesBufferPool().get();
         try {
-            boolean found = false;
-            if (mType == MediaItem.TYPE_MICROTHUMBNAIL && FaceManager.SUPPORT_FACE) {
-                mApplication.getFaceManager();
-            } else {
-                found = cacheService.getImageData(mPath, mTimeModified, mType, buffer);
-            }
-
+            boolean found = found = cacheService.getImageData(mPath, mTimeModified, mType, buffer);
             if (jc.isCancelled()) return null;
             if (found) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -101,7 +94,6 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
 
         byte[] array = BitmapUtils.compressToBytes(bitmap);
         if (jc.isCancelled()) return null;
-
         cacheService.putImageData(mPath, mTimeModified, mType, array);
         return bitmap;
     }

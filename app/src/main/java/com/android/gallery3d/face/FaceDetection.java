@@ -2,14 +2,21 @@ package com.android.gallery3d.face;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.media.FaceDetector;
+import android.util.Log;
 
 /**
  * Created by jingxiang wu on 2017/3/10.
  */
 public class FaceDetection {
-    private final static int IMAGE_WIDTH = 512;
+    private static String TAG = "FaceDetection";
+    private final static int IMAGE_WIDTH = 256;
     private final static int IMAGE_HEIGHT = 512;
+    private int mBitmapWidth;
+    private int mBitmapHeight;
     public float mScale = 1.0f;
     FaceDetector.Face[] mFaces = new FaceDetector.Face[3];
 
@@ -17,27 +24,85 @@ public class FaceDetection {
 
     }
 
-    public boolean detectFace(Bitmap bitmap) {
+    public FaceInfo detectFace(Bitmap bitmap) {
         Bitmap faceBitmap = prepareBitmap(bitmap);
+        Log.d(TAG, "faceBitmap = "+faceBitmap.getWidth() +" "+faceBitmap.getHeight());
         if (faceBitmap != null) {
-            FaceDetector detector = new FaceDetector(faceBitmap.getWidth(),faceBitmap.getHeight(), mFaces.length);
-            detector.findFaces(faceBitmap, mFaces);
+            FaceDetector detector = new FaceDetector(faceBitmap.getWidth(), faceBitmap.getHeight(), mFaces.length);
+            int numberface = detector.findFaces(faceBitmap, mFaces);
+            if (bitmap != faceBitmap) {
+                faceBitmap.recycle();
+                faceBitmap = null;
+            }
+            return handleFace(numberface);
         }
+        return null;
+    }
+
+    private FaceInfo handleFace(int numberFace) {
+        Log.d(TAG, "numberFace = "+numberFace);
+        FaceInfo faceInfo = new FaceInfo();
+        faceInfo.mFaceNumber = numberFace;
+        if (numberFace <= 0) {
+            faceInfo.mHasFace = false;
+            return faceInfo;
+        }
+        faceInfo.mHasFace = true;
+        float scale = 1 / mScale;
+        for (int i = 0; i < numberFace; i++) {
+            FaceDetector.Face f = mFaces[i];
+            PointF midPoint = new PointF();
+            int r = (int) (f.eyesDistance() * scale) * 2;
+            f.getMidPoint(midPoint);
+            midPoint.x *= scale;
+            midPoint.y *= scale;
+            int midX = (int) midPoint.x;
+            int midY = (int) midPoint.y;
+            Rect imageRect = new Rect(0, 0, mBitmapWidth, mBitmapHeight);
+            RectF faceRect = new RectF(midX, midY, midX, midY);
+            faceRect.inset(-r, -r);
+            if (faceRect.left < 0) {
+                faceRect.inset(-faceRect.left, -faceRect.left);
+            }
+            if (faceRect.top < 0) {
+                faceRect.inset(-faceRect.top, -faceRect.top);
+            }
+            if (faceRect.right > imageRect.right) {
+                faceRect.inset(faceRect.right - imageRect.right, faceRect.right - imageRect.right);
+            }
+            if (faceRect.bottom > imageRect.bottom) {
+                faceRect.inset(faceRect.bottom - imageRect.bottom, faceRect.bottom - imageRect.bottom);
+            }
+            FaceInfo.Info info = new FaceInfo.Info();
+            info.faceID = Integer.toString(i);
+            info.faceName = info.faceID + "No name";
+            info.mBitmapWidth = mBitmapWidth;
+            info.mBitmapHeight = mBitmapHeight;
+            info.mRect = faceRect;
+            info.mScale = mScale;
+            faceInfo.mFaceMap.put(info.faceID, info);
+            Log.d(TAG, "<handleFace > face: " + i + " faceRect = " + faceRect.toShortString());
+        }
+        return faceInfo;
     }
 
     private Bitmap prepareBitmap(Bitmap bitmap) {
         if (bitmap == null) {
             return null;
         }
-        if (bitmap.getWidth() > IMAGE_WIDTH) {
-            mScale = IMAGE_WIDTH / bitmap.getWidth();
-            if (mScale * bitmap.getHeight() < 1.0f) {
-                mScale = 1.0f / bitmap.getHeight()；
+        mBitmapWidth = bitmap.getWidth();
+        mBitmapHeight = bitmap.getHeight();
+        if (mBitmapWidth > IMAGE_WIDTH) {
+            mScale = IMAGE_WIDTH / mBitmapWidth;
+            if (mScale * mBitmapHeight < 1.0f) {
+                mScale = 1.0f / mBitmapHeight;
             }
             Matrix matrix = new Matrix();
             matrix.setScale(mScale, mScale);
-            Bitmap faceBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            Bitmap faceBitmap = Bitmap.createBitmap(bitmap, 0, 0, mBitmapWidth, mBitmapHeight, matrix, true);
             return faceBitmap;
         }
+        return bitmap;
     }
+
 }
