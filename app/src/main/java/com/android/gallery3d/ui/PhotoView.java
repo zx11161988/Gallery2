@@ -34,6 +34,7 @@ import com.android.gallery3d.common.Utils;
 import com.android.gallery3d.data.MediaItem;
 import com.android.gallery3d.data.MediaObject;
 import com.android.gallery3d.data.Path;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.glrenderer.RawTexture;
 import com.android.gallery3d.glrenderer.ResourceTexture;
@@ -736,6 +737,7 @@ public class PhotoView extends GLView {
                 drawLoadingFailMessage(canvas);
             }
 
+            FaceManager.drawFaceRect(mModel.getMediaItem(0).getFilePath(), canvas, r, scale);
             // Draw a debug indicator showing which picture has focus (index ==
             // 0).
             //canvas.fillRect(-10, -10, 20, 20, 0x80FF00FF);

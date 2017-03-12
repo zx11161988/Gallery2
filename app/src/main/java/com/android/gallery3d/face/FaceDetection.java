@@ -13,12 +13,12 @@ import android.util.Log;
  */
 public class FaceDetection {
     private static String TAG = "FaceDetection";
-    private final static int IMAGE_WIDTH = 256;
+    private final static float IMAGE_WIDTH = 256;
     private final static int IMAGE_HEIGHT = 512;
     private int mBitmapWidth;
     private int mBitmapHeight;
     public float mScale = 1.0f;
-    FaceDetector.Face[] mFaces = new FaceDetector.Face[3];
+    public static FaceDetector.Face[] mFaces = new FaceDetector.Face[3];
 
     public FaceDetection() {
 
@@ -29,7 +29,9 @@ public class FaceDetection {
         Log.d(TAG, "faceBitmap = "+faceBitmap.getWidth() +" "+faceBitmap.getHeight());
         if (faceBitmap != null) {
             FaceDetector detector = new FaceDetector(faceBitmap.getWidth(), faceBitmap.getHeight(), mFaces.length);
-            int numberface = detector.findFaces(faceBitmap, mFaces);
+            Bitmap temface = faceBitmap.copy(Bitmap.Config.RGB_565, true);
+            int numberface = detector.findFaces(temface, mFaces);
+            temface.recycle();
             if (bitmap != faceBitmap) {
                 faceBitmap.recycle();
                 faceBitmap = null;
@@ -48,6 +50,8 @@ public class FaceDetection {
             return faceInfo;
         }
         faceInfo.mHasFace = true;
+        faceInfo.mBitmapWidth = mBitmapWidth;
+        faceInfo.mBitmapHeight = mBitmapHeight;
         float scale = 1 / mScale;
         for (int i = 0; i < numberFace; i++) {
             FaceDetector.Face f = mFaces[i];
@@ -76,16 +80,13 @@ public class FaceDetection {
             FaceInfo.Info info = new FaceInfo.Info();
             info.faceID = Integer.toString(i);
             info.faceName = info.faceID + "No name";
-            info.mBitmapWidth = mBitmapWidth;
-            info.mBitmapHeight = mBitmapHeight;
             info.mRect = faceRect;
-            info.mScale = mScale;
-            faceInfo.mFaceMap.put(info.faceID, info);
+            faceInfo.faceLists.add(info);
             Log.d(TAG, "<handleFace > face: " + i + " faceRect = " + faceRect.toShortString());
         }
         return faceInfo;
     }
-
+public static int index = 0;
     private Bitmap prepareBitmap(Bitmap bitmap) {
         if (bitmap == null) {
             return null;
@@ -94,12 +95,15 @@ public class FaceDetection {
         mBitmapHeight = bitmap.getHeight();
         if (mBitmapWidth > IMAGE_WIDTH) {
             mScale = IMAGE_WIDTH / mBitmapWidth;
+            Log.d(TAG, "scale = " + mScale);
             if (mScale * mBitmapHeight < 1.0f) {
                 mScale = 1.0f / mBitmapHeight;
             }
             Matrix matrix = new Matrix();
             matrix.setScale(mScale, mScale);
             Bitmap faceBitmap = Bitmap.createBitmap(bitmap, 0, 0, mBitmapWidth, mBitmapHeight, matrix, true);
+            //Utils.dumpBitmap(bitmap, "dump"+(index++));
+            //Log.d(TAG, "dump ="+ " dump"+index +"  "+faceBitmap.getConfig().toString());
             return faceBitmap;
         }
         return bitmap;
