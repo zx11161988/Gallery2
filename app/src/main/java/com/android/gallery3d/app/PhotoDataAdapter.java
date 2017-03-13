@@ -154,6 +154,7 @@ public class PhotoDataAdapter implements PhotoPage.Model {
     private boolean mNeedFullImage;
     private int mFocusHintDirection = FOCUS_HINT_NEXT;
     private Path mFocusHintPath = null;
+    private AbstractGalleryActivity mActivity;
 
     public interface DataListener extends LoadingListener {
         public void onPhotoChanged(int index, Path item);
@@ -172,6 +173,7 @@ public class PhotoDataAdapter implements PhotoPage.Model {
     public PhotoDataAdapter(AbstractGalleryActivity activity, PhotoView view,
             MediaSet mediaSet, Path itemPath, int indexHint, int cameraIndex,
             boolean isPanorama, boolean isStaticCamera) {
+        mActivity = activity;
         mSource = Utils.checkNotNull(mediaSet);
         mPhotoView = Utils.checkNotNull(view);
         mItemPath = Utils.checkNotNull(itemPath);

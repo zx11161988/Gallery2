@@ -2,6 +2,8 @@ package com.android.gallery3d.face;
 
 import android.graphics.RectF;
 
+import com.android.gallery3d.glrenderer.BitmapTexture;
+
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,7 @@ public class FaceInfo {
     public int mBitmapWidth;
     public int mBitmapHeight;
     public float mScale;
+    public BitmapTexture mFaceTexture;
     public ArrayList<Info> faceLists = new ArrayList<Info>();
     public static class Info {
         public RectF mRect;

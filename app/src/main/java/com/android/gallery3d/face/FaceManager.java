@@ -2,9 +2,11 @@ package com.android.gallery3d.face;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.Log;
 
+import com.android.gallery3d.glrenderer.BitmapTexture;
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.glrenderer.GLPaint;
 
@@ -27,24 +29,29 @@ public class FaceManager {
         sGLPaint.setColor(0xFFFFFFFF);
     }
 
-    public static void drawFaceRect(String filePath, GLCanvas canvas, Rect rect, float displayScale) {
-        Log.d(TAG, "drawFaceRect filePath = "+filePath);
-        Log.d(TAG, "drawFaceRect rect= "+ rect.toShortString() +" || displayScale || " + displayScale);
-        FaceInfo faceInfo = sFaceTable.get(filePath);
-        if (null != faceInfo && faceInfo.mHasFace){
-            int number = faceInfo.mFaceNumber;
-            for (int i = 0; i < number; i++) {
-                FaceInfo.Info info = faceInfo.faceLists.get(i);
-                Log.d(TAG, "drawFaceRect = "+ info.mRect.toShortString());
-                float left = info.mRect.left;
-                float top = info.mRect.top;
-                float right = info.mRect.right;
-                float bottom = info.mRect.bottom;
-                canvas.drawRect(left, top, right, bottom, sGLPaint);
-                //canvas.drawRect(rect.left, rect.top, rect.right, rect.bottom, sGLPaint);
+    private void createTexture(FaceInfo faceInfo) {
+        if (faceInfo != null && faceInfo.mHasFace) {
+            Bitmap faceBitmap = Bitmap.createBitmap(faceInfo.mBitmapWidth, faceInfo.mBitmapHeight, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas();
+            Paint paint = new Paint();
+            paint.setAlpha(50);
+            canvas.drawBitmap(faceBitmap, 0,0, paint);
+            //paint.setAlpha(0x00);
+            for (int i = 0; i < faceInfo.mFaceNumber; i++) {
+                //RectF faceRectF = faceInfo.faceLists.get(i).mRect;
+               // canvas.drawRect(faceRectF, paint);
             }
+            BitmapTexture texture = new BitmapTexture(faceBitmap);
+            faceInfo.mFaceTexture = texture;
         }
+    }
 
+    public static void drawFace(String filePath, GLCanvas canvas, int x, int y, int width, int height) {
+        Log.d(TAG, "drawFaceRect filePath = "+filePath);
+        FaceInfo faceInfo = sFaceTable.get(filePath);
+        if (null != faceInfo && faceInfo.mHasFace && faceInfo.mFaceTexture != null){
+            canvas.drawTexture(faceInfo.mFaceTexture, x, y, width, height);
+        }
     }
     public boolean getFace(String path) {
         return false;
@@ -64,6 +71,9 @@ public class FaceManager {
             Log.d(TAG, "<detectFace> UseTime =- "+(System.currentTimeMillis() - beginTime));
         } else {
             Log.d(TAG, "<detectFace> faceInfo = "+faceInfo.mHasFace);
+        }
+        if (faceInfo != null) {
+            createTexture(faceInfo);
         }
         return true;
     }

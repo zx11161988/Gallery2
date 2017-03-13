@@ -36,7 +36,6 @@ import com.android.gallery3d.common.ApiHelper;
 import com.android.gallery3d.common.BitmapUtils;
 import com.android.gallery3d.exif.ExifInterface;
 import com.android.gallery3d.exif.ExifTag;
-import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.filtershow.tools.SaveImage;
 import com.android.gallery3d.util.GalleryUtils;
 import com.android.gallery3d.util.ThreadPool.Job;
@@ -212,9 +211,6 @@ public class LocalImage extends LocalMediaItem {
                 }
             }
             Bitmap bitmap = DecodeUtils.decodeThumbnail(jc, mLocalFilePath, options, targetSize, type);
-            if (FaceManager.SUPPORT_FACE) {
-                mApplication.getFaceManager().detectFace(bitmap, mPath.toString(), mLocalFilePath);
-            }
             return bitmap;
         }
     }

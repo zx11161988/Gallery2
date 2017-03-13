@@ -22,6 +22,7 @@ import android.graphics.BitmapFactory;
 import com.android.gallery3d.app.GalleryApp;
 import com.android.gallery3d.common.BitmapUtils;
 import com.android.gallery3d.data.BytesBufferPool.BytesBuffer;
+import com.android.gallery3d.face.FaceManager;
 import com.android.gallery3d.util.ThreadPool.Job;
 import com.android.gallery3d.util.ThreadPool.JobContext;
 
@@ -54,6 +55,7 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
         ImageCacheService cacheService = mApplication.getImageCacheService();
 
         BytesBuffer buffer = MediaItem.getBytesBufferPool().get();
+        String filePath = ((MediaItem)mPath.getObject()).getFilePath();
         try {
             boolean found = found = cacheService.getImageData(mPath, mTimeModified, mType, buffer);
             if (jc.isCancelled()) return null;
@@ -67,6 +69,9 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
                 } else {
                     bitmap = DecodeUtils.decodeUsingPool(jc,
                             buffer.data, buffer.offset, buffer.length, options);
+                    if (FaceManager.SUPPORT_FACE) {
+                        mApplication.getFaceManager().detectFace(bitmap, mPath.toString(), filePath);
+                    }
                 }
                 if (bitmap == null && !jc.isCancelled()) {
                     Log.w(TAG, "decode cached failed " + debugTag());
@@ -83,12 +88,16 @@ abstract class ImageCacheRequest implements Job<Bitmap> {
             Log.w(TAG, "decode orig failed " + debugTag());
             return null;
         }
-
         if (mType == MediaItem.TYPE_MICROTHUMBNAIL) {
-
+            if (FaceManager.SUPPORT_FACE) {
+                mApplication.getFaceManager().detectFace(bitmap, mPath.toString(), filePath);
+            }
             bitmap = BitmapUtils.resizeAndCropCenter(bitmap, mTargetSize, true);
         } else {
             bitmap = BitmapUtils.resizeDownBySideLength(bitmap, mTargetSize, true);
+            if (FaceManager.SUPPORT_FACE) {
+                mApplication.getFaceManager().detectFace(bitmap, mPath.toString(), filePath);
+            }
         }
         if (jc.isCancelled()) return null;
 
