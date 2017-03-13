@@ -29,23 +29,24 @@ public class FaceManager {
         sGLPaint.setColor(0xFFFFFFFF);
     }
 
-    private void createTexture(FaceInfo faceInfo) {
+    private void createTexture(FaceInfo faceInfo, Bitmap background) {
         if (faceInfo != null && faceInfo.mHasFace) {
             Bitmap faceBitmap = Bitmap.createBitmap(faceInfo.mBitmapWidth, faceInfo.mBitmapHeight, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas();
+            Canvas canvas = new Canvas(faceBitmap);
             Paint paint = new Paint();
             paint.setAlpha(50);
-            canvas.drawBitmap(faceBitmap, 0,0, paint);
-            //paint.setAlpha(0x00);
+            canvas.drawBitmap(background, 0,0, paint);
+            //paint.setAlpha(100);
             for (int i = 0; i < faceInfo.mFaceNumber; i++) {
                 //RectF faceRectF = faceInfo.faceLists.get(i).mRect;
-               // canvas.drawRect(faceRectF, paint);
+                //canvas.drawRect(faceRectF, paint);
             }
+            Utils.dumpBitmap(faceBitmap, "overlay"+(i++));
             BitmapTexture texture = new BitmapTexture(faceBitmap);
             faceInfo.mFaceTexture = texture;
         }
     }
-
+ public static  int i = 0;
     public static void drawFace(String filePath, GLCanvas canvas, int x, int y, int width, int height) {
         Log.d(TAG, "drawFaceRect filePath = "+filePath);
         FaceInfo faceInfo = sFaceTable.get(filePath);
@@ -73,7 +74,7 @@ public class FaceManager {
             Log.d(TAG, "<detectFace> faceInfo = "+faceInfo.mHasFace);
         }
         if (faceInfo != null) {
-            createTexture(faceInfo);
+            createTexture(faceInfo, bitmap);
         }
         return true;
     }
