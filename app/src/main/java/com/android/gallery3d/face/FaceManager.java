@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.Log;
 
 import com.android.gallery3d.glrenderer.BitmapTexture;
@@ -34,11 +35,23 @@ public class FaceManager {
             Bitmap faceBitmap = Bitmap.createBitmap(faceInfo.mBitmapWidth, faceInfo.mBitmapHeight, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(faceBitmap);
             Paint paint = new Paint();
-            paint.setAlpha(50);
+            paint.setAlpha(255);
             canvas.drawBitmap(background, 0,0, paint);
-            //paint.setAlpha(100);
+            paint.setAlpha(0);
+            paint.setColor(0xFFFFFFFF);;
             for (int i = 0; i < faceInfo.mFaceNumber; i++) {
-                //RectF faceRectF = faceInfo.faceLists.get(i).mRect;
+                RectF faceRectF = faceInfo.faceLists.get(i).mRect;
+                float[] points = new float[]{
+                            faceRectF.left, faceRectF.top,
+                            faceRectF.right,faceRectF.top,
+                            faceRectF.right,faceRectF.top,
+                            faceRectF.right,faceRectF.bottom,
+                            faceRectF.right,faceRectF.bottom,
+                            faceRectF.left,faceRectF.bottom,
+                            faceRectF.left,faceRectF.bottom,
+                            faceRectF.left, faceRectF.top
+                    };
+                canvas.drawLines(points, paint);
                 //canvas.drawRect(faceRectF, paint);
             }
             Utils.dumpBitmap(faceBitmap, "overlay"+(i++));
@@ -73,7 +86,7 @@ public class FaceManager {
         } else {
             Log.d(TAG, "<detectFace> faceInfo = "+faceInfo.mHasFace);
         }
-        if (faceInfo != null) {
+        if (faceInfo != null && faceInfo.mFaceTexture == null) {
             createTexture(faceInfo, bitmap);
         }
         return true;
