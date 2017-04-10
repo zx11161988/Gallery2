@@ -23,5 +23,6 @@ public class FaceInfo {
         public RectF mRect;
         public String faceID;
         public String faceName;
+        public String faceThumbNail;
     }
 }

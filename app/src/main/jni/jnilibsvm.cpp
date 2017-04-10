@@ -1,7 +1,10 @@
 //==========================================================================
 // 2015/08/31: yctung: add this new test for libSVM in jni interface 
 //==========================================================================
-
+#include <opencv2/core/core.hpp>
+//#include <opencv2/objdetect/detection_based_tracker.hpp>
+#include "opencv2/contrib/contrib.hpp"
+#include "opencv2/highgui/highgui.hpp"
 #include <jni.h>
 #include <string.h>
 #include <android/log.h>
@@ -12,8 +15,14 @@
 #include "./libsvm/svm-train.h"
 #include "./libsvm/svm-predict.h"
 #include "common.h"
-
-
+using namespace cv;
+extern "C" void Java_com_android_classification_Svm_jnitrain (JNIEnv *env, jobject obj, jstring trainPath){
+    const char *cmd = env->GetStringUTFChars(trainPath, 0);
+    debug("jnitrain trainPath = %s", trainPath);
+    Ptr<FaceRecognizer> model2 = createLBPHFaceRecognizer();
+    	// free java object memory
+    env->ReleaseStringUTFChars(trainPath, cmd);
+}
 
 // helper function to be called in Java for making svm-train
 extern "C" void Java_com_android_classification_Svm_jniSvmTrain(JNIEnv *env, jobject obj, jstring cmdIn){

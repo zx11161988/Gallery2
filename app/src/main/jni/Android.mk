@@ -1,8 +1,7 @@
 LOCAL_PATH:=$(call my-dir)
-
 include $(CLEAR_VARS)
-
-#include ../../OpenCV-2.4.7-android-sdk/sdk/native/jni/OpenCV.mk
+#include ../../../../../../../opencv-3.2.0-android-sdk/OpenCV-android-sdk/sdk/native/jni/OpenCV.mk
+include ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/OpenCV.mk
 #include /Users/eddyxd/Documents/workspace/OpenCV-2.4.7-android-sdk/sdk/native/jni/OpenCV.mk
 
 LOCAL_MODULE	:= jnilibsvm
