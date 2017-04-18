@@ -191,7 +191,6 @@ public class LocalImage extends LocalMediaItem {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             int targetSize = MediaItem.getTargetSize(type);
-
             // try to decode from JPEG EXIF
             if (type == MediaItem.TYPE_MICROTHUMBNAIL) {
                 ExifInterface exif = new ExifInterface();

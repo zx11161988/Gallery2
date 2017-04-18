@@ -17,13 +17,14 @@ import java.io.OutputStream;
  */
 public class Utils {
     private final static String TAG = "Utils";
-    private static final String SD = Environment.getExternalStorageDirectory().toString();
-    private final static String DUMP_PATH = SD + "/.face/";
+    public static final String SD = Environment.getExternalStorageDirectory().toString();
+    public final static String DUMP_PATH = SD + "/.face/";
+    public final static String SUFFIX = "jpg";
     private static long[] sCrcTable = new long[256];
     private static final long INITIALCRC = 0xFFFFFFFFFFFFFFFFL;
 
     public static void dumpBitmap(Bitmap bitmap, String filename) {
-        filename = filename + ".jpg";
+        filename = filename + "."+SUFFIX;
         File path = new File(DUMP_PATH);
         if (!path.exists()) {
             path.mkdir();

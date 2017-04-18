@@ -38,6 +38,9 @@ public class FaceManager {
         mSvm.test();
 
     }
+    public FaceInfo getFaceInfo(String filePath) {
+        return mFaceTable.get(filePath);
+    }
 
     public boolean supportedOperations(String filePath) {
         Log.d(TAG, "supportedOperations filePath = "+filePath);
@@ -87,9 +90,6 @@ public class FaceManager {
             canvas.drawTexture(faceInfo.mFaceTexture, x, y, width, height);
         }
     }
-    public boolean getFace(String path) {
-        return false;
-    }
 
     public synchronized boolean detectFace(Bitmap bitmap, String path, String filePath) {
         FaceInfo faceInfo = mFaceTable.get(filePath);
@@ -130,6 +130,7 @@ public class FaceManager {
             face = Utils.resizeAndCropCenter(face, sThumbNailWidth, sThumbNailHeight, true);
             String[] c = faceInfo.mFilePath.split("\\/|\\.");
             info.faceThumbNail = c[c.length -2]+"_"+info.faceID;
+            info.getFaceThumbNailPath = Utils.DUMP_PATH + ""+info.faceThumbNail+ "."+ Utils.SUFFIX;
             Log.d(TAG, "<detectFace> faceInfo = "+ info.faceThumbNail);
             Utils.dumpBitmap(face, info.faceThumbNail);
         }

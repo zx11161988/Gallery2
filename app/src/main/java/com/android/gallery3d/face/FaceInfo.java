@@ -24,5 +24,6 @@ public class FaceInfo {
         public String faceID;
         public String faceName;
         public String faceThumbNail;
+        public String getFaceThumbNailPath;
     }
 }
