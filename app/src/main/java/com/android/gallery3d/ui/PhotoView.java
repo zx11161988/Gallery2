@@ -255,11 +255,12 @@ public class PhotoView extends GLView {
     private int mUndoIndexHint = Integer.MAX_VALUE;
 
     private Context mContext;
-
+    private FaceManager mFaceManager;
     public PhotoView(AbstractGalleryActivity activity) {
         mTileView = new TileImageView(activity);
         addComponent(mTileView);
         mContext = activity.getAndroidContext();
+        mFaceManager = activity.getFaceManager();
         mPlaceholderColor = mContext.getResources().getColor(
                 R.color.photo_placeholder);
         mEdgeView = new EdgeView(mContext);
@@ -764,7 +765,7 @@ public class PhotoView extends GLView {
             if (mLoadingState == Model.LOADING_FAIL) {
                 drawLoadingFailMessage(canvas);
             }
-            FaceManager.drawFace(mModel.getMediaItem(0).getFilePath(), canvas, -r.width() / 2, -r.height() / 2, r.width(), r.height());
+            mFaceManager.drawFace(mModel.getMediaItem(0).getFilePath(), canvas, -r.width() / 2, -r.height() / 2, r.width(), r.height());
             // Draw a debug indicator showing which picture has focus (index ==
             // 0).
             //canvas.fillRect(-10, -10, 20, 20, 0x80FF00FF);

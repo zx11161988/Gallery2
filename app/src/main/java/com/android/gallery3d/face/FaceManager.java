@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 
+import com.android.classification.Svm;
 import com.android.gallery3d.common.BitmapUtils;
 import com.android.gallery3d.glrenderer.BitmapTexture;
 import com.android.gallery3d.glrenderer.GLCanvas;
@@ -23,15 +24,29 @@ public class FaceManager {
     public static boolean SUPPORT_FACE = true;
     private Context mContext;
     private FaceDatabaseHelper mDBHelper;
-    private static Hashtable<String, FaceInfo> sFaceTable = new Hashtable<String, FaceInfo>();
+    private Hashtable<String, FaceInfo> mFaceTable = new Hashtable<String, FaceInfo>();
     private static GLPaint sGLPaint = new GLPaint();
     private static int sThumbNailWidth = 92;
     private static int sThumbNailHeight = 112;
+    private Svm mSvm;
     public FaceManager(Context context) {
         mContext = context;
         mDBHelper = new FaceDatabaseHelper(context);
         sGLPaint.setLineWidth(2);
         sGLPaint.setColor(0xFFFFFFFF);
+        mSvm = new Svm();
+        mSvm.test();
+
+    }
+
+    public boolean supportedOperations(String filePath) {
+        Log.d(TAG, "supportedOperations filePath = "+filePath);
+        FaceInfo faceInfo = mFaceTable.get(filePath);
+        if (SUPPORT_FACE && faceInfo != null) {
+            return faceInfo.mHasFace;
+        } else {
+            return false;
+        }
     }
 
     private void createTexture(FaceInfo faceInfo, Bitmap background) {
@@ -65,9 +80,9 @@ public class FaceManager {
         }
     }
 
-    public static void drawFace(String filePath, GLCanvas canvas, int x, int y, int width, int height) {
+    public void drawFace(String filePath, GLCanvas canvas, int x, int y, int width, int height) {
         Log.d(TAG, "drawFaceRect filePath = "+filePath);
-        FaceInfo faceInfo = sFaceTable.get(filePath);
+        FaceInfo faceInfo = mFaceTable.get(filePath);
         if (null != faceInfo && faceInfo.mHasFace && faceInfo.mFaceTexture != null){
             canvas.drawTexture(faceInfo.mFaceTexture, x, y, width, height);
         }
@@ -77,7 +92,7 @@ public class FaceManager {
     }
 
     public synchronized boolean detectFace(Bitmap bitmap, String path, String filePath) {
-        FaceInfo faceInfo = sFaceTable.get(filePath);
+        FaceInfo faceInfo = mFaceTable.get(filePath);
         if (faceInfo == null) {
             long beginTime = System.currentTimeMillis();
             Log.d(TAG, "<detectFace> filePath = "+filePath);
@@ -86,7 +101,7 @@ public class FaceManager {
             faceInfo = faceDetection.detectFace(bitmap);
             faceInfo.mFilePath = filePath;
             faceInfo.mPath = path;
-            sFaceTable.put(filePath, faceInfo);
+            mFaceTable.put(filePath, faceInfo);
             Log.d(TAG, "<detectFace> UseTime =- "+(System.currentTimeMillis() - beginTime));
         } else {
             Log.d(TAG, "<detectFace> faceInfo = "+faceInfo.mHasFace);

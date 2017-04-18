@@ -1,7 +1,6 @@
-D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/jnilibsvm.o: \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/jnilibsvm.cpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/types_c.h \
+obj/local/armeabi/objs/jnilibsvm/jnilibsvm.o: jni/jnilibsvm.cpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/types_c.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/assert.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -32,38 +31,36 @@ D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/jnili
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/machine/limits.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/syslimits.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm/page.h \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/version.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/version.hpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/algorithm \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/complex \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/map \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/operations.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/operations.hpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/limits \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/mat.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/contrib.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/imgproc.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/types_c.h \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core_c.h \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/features2d/features2d.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/miniflann.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/defines.h \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/config.h \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/objdetect/objdetect.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/mat.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/contrib.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/imgproc.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/types_c.h \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core_c.h \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/features2d/features2d.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/miniflann.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/defines.h \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/config.h \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/objdetect/objdetect.hpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/deque \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/retina.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/retina.hpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/valarray \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/openfabmap.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/openfabmap.hpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/list \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/set \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui.hpp \
- ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui_c.h \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui.hpp \
+ D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui_c.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/android/log.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/./libsvm/svm-train.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/./libsvm/svm-predict.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/common.h \
+ jni/./libsvm/svm-train.h jni/./libsvm/svm-predict.h jni/common.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/fcntl.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/linux/fcntl.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm/fcntl.h \
@@ -74,9 +71,9 @@ D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/jnili
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm-generic/errno.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm-generic/errno-base.h
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/types_c.h:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/types_c.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/assert.h:
 
@@ -138,7 +135,7 @@ D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/u
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm/page.h:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/version.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/version.hpp:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/algorithm:
 
@@ -152,55 +149,55 @@ D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/vector:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/operations.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/operations.hpp:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/limits:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/mat.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/mat.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/contrib.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/contrib.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/imgproc.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/imgproc.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/types_c.h:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/imgproc/types_c.h:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core_c.h:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/core/core_c.h:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/features2d/features2d.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/features2d/features2d.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/miniflann.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/miniflann.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/defines.h:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/defines.h:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/config.h:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/flann/config.h:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/objdetect/objdetect.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/objdetect/objdetect.hpp:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/deque:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/retina.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/retina.hpp:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/valarray:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/openfabmap.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/contrib/openfabmap.hpp:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/list:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/set:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui.hpp:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui.hpp:
 
-../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui_c.h:
+D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/include/opencv2/highgui/highgui_c.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/android/log.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/./libsvm/svm-train.h:
+jni/./libsvm/svm-train.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/./libsvm/svm-predict.h:
+jni/./libsvm/svm-predict.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/common.h:
+jni/common.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/fcntl.h:
 

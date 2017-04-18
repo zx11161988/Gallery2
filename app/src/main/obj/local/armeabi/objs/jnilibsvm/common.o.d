@@ -1,6 +1,4 @@
-D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/common.o: \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/common.cpp \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/common.h \
+obj/local/armeabi/objs/jnilibsvm/common.o: jni/common.cpp jni/common.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -22,7 +20,7 @@ D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/commo
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/list \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/sstream
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/common.h:
+jni/common.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h:
 

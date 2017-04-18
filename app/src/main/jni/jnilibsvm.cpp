@@ -16,14 +16,38 @@
 #include "./libsvm/svm-predict.h"
 #include "common.h"
 using namespace cv;
-extern "C" void Java_com_android_classification_Svm_jnitrain (JNIEnv *env, jobject obj, jstring trainPath){
+
+extern "C" void Java_com_android_classification_Svm_jnitrain(JNIEnv *env, jobject obj, jstring trainPath){
     const char *cmd = env->GetStringUTFChars(trainPath, 0);
-    debug("jnitrain trainPath = %s", trainPath);
+	debug("jniPredict cmd = %s", cmd);
     Ptr<FaceRecognizer> model2 = createLBPHFaceRecognizer();
     	// free java object memory
     env->ReleaseStringUTFChars(trainPath, cmd);
 }
 
+extern "C" void Java_com_android_classification_Svm_jnipredict(JNIEnv *env, jobject obj, jstring predictPath){
+	const char *cmd = env->GetStringUTFChars(predictPath, 0);
+	debug("jniPredict cmd = %s", cmd);
+
+	std::vector<char*> v;
+
+	// add dummy head to meet argv/command format
+	std::string cmdString = std::string("dummy ")+std::string(cmd);
+
+	cmdToArgv(cmdString, v);
+
+	// make svm train by libsvm
+	svmpredict::main(v.size(),&v[0]);
+
+
+	// free vector memory
+	for(int i=0;i<v.size();i++){
+		free(v[i]);
+	}
+
+	// free java object memory
+	env->ReleaseStringUTFChars(predictPath, cmd);
+}
 // helper function to be called in Java for making svm-train
 extern "C" void Java_com_android_classification_Svm_jniSvmTrain(JNIEnv *env, jobject obj, jstring cmdIn){
 	const char *cmd = env->GetStringUTFChars(cmdIn, 0);

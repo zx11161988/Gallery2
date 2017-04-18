@@ -101,6 +101,7 @@ public abstract class PhotoPage extends ActivityState implements
     private static final int REQUEST_EDIT = 4;
     private static final int REQUEST_PLAY_VIDEO = 5;
     private static final int REQUEST_TRIM = 6;
+    private static final int REQUEST_FACE_EDITOR = 7;
 
     public static final String KEY_MEDIA_SET_PATH = "media-set-path";
     public static final String KEY_MEDIA_ITEM_PATH = "media-item-path";
@@ -783,6 +784,13 @@ public abstract class PhotoPage extends ActivityState implements
                 supportedOperations &= ~MediaObject.SUPPORT_EDIT;
             }
         }
+        if (mCurrentPhoto != null) {
+            boolean needEditFace = mApplication.getFaceManager().supportedOperations(mCurrentPhoto.getFilePath());
+            Log.d(TAG,  "needEditFace = "+ needEditFace);
+            if (needEditFace) {
+                supportedOperations |= MediaObject.SUPPORT_FACE_EDIT;
+            }
+        }
         MenuExecutor.updateMenuOperation(menu, supportedOperations);
     }
 
@@ -1098,6 +1106,13 @@ public abstract class PhotoPage extends ActivityState implements
                 mSelectionManager.toggle(path);
                 mMenuExecutor.onMenuClicked(item, confirmMsg, mConfirmDialogListener);
                 return true;
+            case R.id.action_face_edit:
+                Intent intent = new Intent();
+                intent.setClassName(mActivity, "com.android.gallery3d.faceditor.FaceListActivity");
+                intent.setData(Uri.parse(mCurrentPhoto.getFilePath()));
+                mActivity.startActivityForResult(intent, REQUEST_FACE_EDITOR);
+                Log.d(TAG, "Start Face Editor");
+                return true;
             default :
                 return false;
         }
@@ -1287,6 +1302,9 @@ public abstract class PhotoPage extends ActivityState implements
                 if (path != null) {
                     mModel.setCurrentPhoto(Path.fromString(path), index);
                 }
+            }
+            case REQUEST_FACE_EDITOR: {
+                Log.d(TAG, "REQUEST_FACE_EDITOR");
             }
         }
     }

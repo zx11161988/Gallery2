@@ -6,10 +6,16 @@ package com.android.classification;
 
 public class Svm {
     // connect the native functions
+    static{
+        System.loadLibrary("jnisvm");
+    }
+    public void test() {
+        jnitrain("Test");
+    }
     private native void jniSvmTrain(String cmd);
     private native void jniSvmPredict(String cmd);
-    //private native void jnitrain(String trainPath);
-    //private native void jnipredict(String predictPath);
+    private native void jnitrain(String trainPath);
+    private native void jnipredict(String predictPath);
     //private natvie
 
 }

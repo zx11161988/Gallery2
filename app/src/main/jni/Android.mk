@@ -1,13 +1,11 @@
 LOCAL_PATH:=$(call my-dir)
 include $(CLEAR_VARS)
-#include ../../../../../../../opencv-3.2.0-android-sdk/OpenCV-android-sdk/sdk/native/jni/OpenCV.mk
-include ../../../../../../../OpenCV-2.4.9-android-sdk/sdk/native/jni/OpenCV.mk
-#include /Users/eddyxd/Documents/workspace/OpenCV-2.4.7-android-sdk/sdk/native/jni/OpenCV.mk
 
-LOCAL_MODULE	:= jnilibsvm
-#LOCAL_CFLAGS	:= -Werror
-LOCAL_CFLAGS    := -DDEV_NDK=1
-#LOCAL_SRC_FILES := common.cpp acoustic_detection.cpp
+OPENCV_LIB_TYPE:=STATIC
+include D:/OpenCV-2.4.9-android-sdk/sdk/native/jni/OpenCV.mk
+
+LOCAL_MODULE	:= jnisvm
+LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_SRC_FILES := \
 	common.cpp jnilibsvm.cpp \
 	libsvm/svm-train.cpp \

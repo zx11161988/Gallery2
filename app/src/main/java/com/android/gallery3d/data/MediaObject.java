@@ -42,6 +42,7 @@ public abstract class MediaObject {
     public static final int SUPPORT_CAMERA_SHORTCUT = 1 << 15;
     public static final int SUPPORT_MUTE = 1 << 16;
     public static final int SUPPORT_PRINT = 1 << 17;
+    public static final int SUPPORT_FACE_EDIT = 1 << 18;
     public static final int SUPPORT_ALL = 0xffffffff;
 
     // These are the bits returned from getMediaType():

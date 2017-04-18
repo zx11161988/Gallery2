@@ -38,8 +38,8 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    /*task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+/*
+    task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
         def ndkDir = android.ndkDirectory
         commandLine "$ndkDir/ndk-build.cmd",
                 '-C', file('D:\\GitHub\\Gallery2\\Gallery2\\app\\src\\main/jni').absolutePath, // Change src/main/jni the relative path to your jni source

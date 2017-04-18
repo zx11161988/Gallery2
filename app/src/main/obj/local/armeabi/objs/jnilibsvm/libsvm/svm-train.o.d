@@ -1,5 +1,5 @@
-D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/libsvm/svm-train.o: \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm-train.cpp \
+obj/local/armeabi/objs/jnilibsvm/libsvm/svm-train.o: \
+ jni/libsvm/svm-train.cpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/stdio.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -28,7 +28,7 @@ D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/libsv
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm/errno.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm-generic/errno.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm-generic/errno-base.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/../common.h \
+ jni/libsvm/../common.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/string \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/android/log.h \
@@ -39,8 +39,7 @@ D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/libsv
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm-generic/fcntl.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/list \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/sstream \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm-train.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm.h
+ jni/libsvm/svm-train.h jni/libsvm/svm.h
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/stdio.h:
 
@@ -98,7 +97,7 @@ D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/u
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/asm-generic/errno-base.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/../common.h:
+jni/libsvm/../common.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h:
 
@@ -120,6 +119,6 @@ D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/sstream:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm-train.h:
+jni/libsvm/svm-train.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm.h:
+jni/libsvm/svm.h:

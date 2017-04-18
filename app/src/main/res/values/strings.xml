@@ -162,6 +162,7 @@
     <!-- String indicating timestamp of photo or video -->
     <string name="show_on_map">Show on map</string>
     <string name="rotate_left">Rotate left</string>
+    <string name="face_edit">Face editor</string>
     <string name="rotate_right">Rotate right</string>
 
     <!-- Toast message prompted when the specified item is not found [CHAR LIMIT=40]-->

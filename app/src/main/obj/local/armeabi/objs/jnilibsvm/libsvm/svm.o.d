@@ -1,5 +1,4 @@
-D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/libsvm/svm.o: \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm.cpp \
+obj/local/armeabi/objs/jnilibsvm/libsvm/svm.o: jni/libsvm/svm.cpp \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/math.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -32,8 +31,7 @@ D:/GitHub/Gallery2/Gallery2/app/src/main//obj/local/armeabi/objs/jnilibsvm/libsv
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/memory.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/ctype.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/locale.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm.h \
- D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/../common.h \
+ jni/libsvm/svm.h jni/libsvm/../common.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.6/include/string \
  D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/android/log.h \
@@ -114,9 +112,9 @@ D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/u
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/locale.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/svm.h:
+jni/libsvm/svm.h:
 
-D:/GitHub/Gallery2/Gallery2/app/src/main//jni/libsvm/../common.h:
+jni/libsvm/../common.h:
 
 D:/android-ndk-r9d-windows-x86_64/android-ndk-r9d/platforms/android-3/arch-arm/usr/include/jni.h:
 
