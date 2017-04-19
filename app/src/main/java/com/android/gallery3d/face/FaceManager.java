@@ -9,12 +9,14 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import com.android.classification.Svm;
-import com.android.gallery3d.common.BitmapUtils;
 import com.android.gallery3d.glrenderer.BitmapTexture;
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.glrenderer.GLPaint;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by jingxiang wu on 2017/3/9.
@@ -89,6 +91,21 @@ public class FaceManager {
         if (null != faceInfo && faceInfo.mHasFace && faceInfo.mFaceTexture != null){
             canvas.drawTexture(faceInfo.mFaceTexture, x, y, width, height);
         }
+    }
+
+    public synchronized ArrayList<FaceInfo.Info> getFaceList() {
+        if (mFaceTable != null) {
+            ArrayList<FaceInfo.Info> list = new ArrayList<FaceInfo.Info>();
+            Iterator<Map.Entry<String, FaceInfo>> it = mFaceTable.entrySet().iterator();
+                while(it.hasNext()) {
+                    FaceInfo faceInfo = it.next().getValue();
+                    if (faceInfo.mHasFace) {
+                        list.addAll(faceInfo.faceLists);
+                    }
+                }
+            return list;
+        }
+        return null;
     }
 
     public synchronized boolean detectFace(Bitmap bitmap, String path, String filePath) {

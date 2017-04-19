@@ -163,8 +163,11 @@
     <string name="show_on_map">Show on map</string>
     <string name="rotate_left">Rotate left</string>
     <string name="face_edit">Face editor</string>
+    <string name="face_info_edit">Edit</string>
+    <string name="face_name">FaceName:</string>
+    <string name="face_id">FaceID:</string>
     <string name="rotate_right">Rotate right</string>
-
+s
     <!-- Toast message prompted when the specified item is not found [CHAR LIMIT=40]-->
     <string name="no_such_item">Couldn\'t find item.</string>
 

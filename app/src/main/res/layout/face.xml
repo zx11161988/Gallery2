@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/facelayout"
+              android:weightSum="1">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/filtershow_icon_vignette"
+        android:id="@+id/face"
+        android:weightSum="1"/>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:id="@+id/state"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/face_id_name"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_gallery_play"
+        android:id="@+id/edit_button"
+        android:text="@string/edit"
+        android:layout_weight="1"/>
+
+</LinearLayout>

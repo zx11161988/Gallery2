@@ -20,6 +20,7 @@ public class FaceInfo {
     public BitmapTexture mFaceTexture;
     public ArrayList<Info> faceLists = new ArrayList<Info>();
     public static class Info {
+        public boolean mTagByManual;
         public RectF mRect;
         public String faceID;
         public String faceName;
