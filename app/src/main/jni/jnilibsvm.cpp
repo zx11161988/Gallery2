@@ -19,7 +19,7 @@ using namespace cv;
 
 extern "C" void Java_com_android_classification_Svm_jnitrain(JNIEnv *env, jobject obj, jstring trainPath){
     const char *cmd = env->GetStringUTFChars(trainPath, 0);
-	debug("jniPredict cmd = %s", cmd);
+	debug("jniTrain cmd = %s", cmd);
     Ptr<FaceRecognizer> model2 = createLBPHFaceRecognizer();
     	// free java object memory
     env->ReleaseStringUTFChars(trainPath, cmd);
