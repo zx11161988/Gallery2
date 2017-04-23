@@ -14,6 +14,7 @@
 #include <vector>
 #include "./libsvm/svm-train.h"
 #include "./libsvm/svm-predict.h"
+#include "lbph.h"
 #include "common.h"
 using namespace cv;
 

@@ -8,6 +8,7 @@ LOCAL_MODULE	:= jnisvm
 LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_SRC_FILES := \
 	common.cpp jnilibsvm.cpp \
+	lbph.cpp \
 	libsvm/svm-train.cpp \
 	libsvm/svm-predict.cpp \
 	libsvm/svm.cpp
