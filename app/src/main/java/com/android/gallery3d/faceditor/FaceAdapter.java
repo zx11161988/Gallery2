@@ -64,6 +64,9 @@ public class FaceAdapter extends BaseAdapter {
         }
     }
 
+    public ArrayList<FaceInfo.Info> getFaceInfoList() {
+        return mList;
+    }
     /**
      * Get the data item associated with the specified position in the data set.
      *

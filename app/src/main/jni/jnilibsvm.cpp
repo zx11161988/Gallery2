@@ -18,37 +18,38 @@
 #include "common.h"
 using namespace cv;
 
-extern "C" void Java_com_android_classification_Svm_jnitrain(JNIEnv *env, jobject obj, jstring trainPath){
-    const char *cmd = env->GetStringUTFChars(trainPath, 0);
-	debug("jniTrain cmd = %s", cmd);
+extern "C" jint * Java_com_android_classification_Svm_jnitrain(JNIEnv *env, jobject thiz,
+     jobjectArray trainSetPaths, jintArray trainSetLabels,  jobjectArray predictSetPaths){
+    //const char *cmd = env->GetStringUTFChars(trainPath, 0);
+	//debug("jniTrain cmd = %s", cmd);
+    int size=env->GetArrayLength(trainSetPaths);
+    for(int i = 0; i < size; i++) {
+        jstring obja=(jstring)env->GetObjectArrayElement(trainSetPaths,i);
+        const char* chars=env->GetStringUTFChars(obja,NULL);//将jstring类型转换成char类型输出
+        debug("jniPredict:trainSetPaths cmd = %s", chars);
+        env->ReleaseStringUTFChars(obja, chars);
+    }
+
+    jint* labs = env->GetIntArrayElements(trainSetLabels,NULL);
+    size = env->GetArrayLength(trainSetLabels);
+    for(int i = 0; i < size; i++) {
+        debug("jniPredict:trainSetLabels cmd = %d", labs[i]);
+    }
+
+    size=env->GetArrayLength(predictSetPaths);
+    for(int i = 0; i < size; i++) {
+        jstring obja=(jstring)env->GetObjectArrayElement(predictSetPaths,i);
+        const char* chars=env->GetStringUTFChars(obja,NULL);//将jstring类型转换成char类型输出
+        debug("jniPredict:predictSetPaths cmd = %s", chars);
+        env->ReleaseStringUTFChars(obja, chars);
+    }
+
     Ptr<FaceRecognizer> model2 = createLBPHFaceRecognizer();
     	// free java object memory
-    env->ReleaseStringUTFChars(trainPath, cmd);
+    //env->ReleaseStringUTFChars(trainPath, cmd);
+    return labs;
 }
 
-extern "C" void Java_com_android_classification_Svm_jnipredict(JNIEnv *env, jobject obj, jstring predictPath){
-	const char *cmd = env->GetStringUTFChars(predictPath, 0);
-	debug("jniPredict cmd = %s", cmd);
-
-	std::vector<char*> v;
-
-	// add dummy head to meet argv/command format
-	std::string cmdString = std::string("dummy ")+std::string(cmd);
-
-	cmdToArgv(cmdString, v);
-
-	// make svm train by libsvm
-	svmpredict::main(v.size(),&v[0]);
-
-
-	// free vector memory
-	for(int i=0;i<v.size();i++){
-		free(v[i]);
-	}
-
-	// free java object memory
-	env->ReleaseStringUTFChars(predictPath, cmd);
-}
 // helper function to be called in Java for making svm-train
 extern "C" void Java_com_android_classification_Svm_jniSvmTrain(JNIEnv *env, jobject obj, jstring cmdIn){
 	const char *cmd = env->GetStringUTFChars(cmdIn, 0);

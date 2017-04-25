@@ -106,7 +106,9 @@ public class FaceEditDialog extends DialogFragment implements View.OnClickListen
         mInfo.faceID = Integer.toString(mInfo.faceName.hashCode());
         Log.d(TAG, "texChanged: "+ mInfo.faceName +" | "+mInfo.faceID);
         mFaceNameID.setText(mInfo.faceID);
-        mInfo.mTagByManual = true;
+        if (mInfo.faceName != null) {
+            mInfo.mTagByManual = true;
+        }
     }
 
 }

@@ -22,13 +22,6 @@
               android:divider="?android:dividerVertical"
               android:showDividers="middle">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_margin="7dp"
-        android:text="@string/face_edit"/>
-
     <GridLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

@@ -37,7 +37,6 @@ public class FaceManager {
         sGLPaint.setLineWidth(2);
         sGLPaint.setColor(0xFFFFFFFF);
         mSvm = new Svm();
-        mSvm.test();
 
     }
     public FaceInfo getFaceInfo(String filePath) {
