@@ -18,36 +18,50 @@
 #include "common.h"
 using namespace cv;
 
-extern "C" jint * Java_com_android_classification_Svm_jnitrain(JNIEnv *env, jobject thiz,
+extern "C" jintArray Java_com_android_classification_Svm_jnitrain(JNIEnv *env, jobject thiz,
      jobjectArray trainSetPaths, jintArray trainSetLabels,  jobjectArray predictSetPaths){
     //const char *cmd = env->GetStringUTFChars(trainPath, 0);
 	//debug("jniTrain cmd = %s", cmd);
     int size=env->GetArrayLength(trainSetPaths);
+    vector<Mat> images;
     for(int i = 0; i < size; i++) {
         jstring obja=(jstring)env->GetObjectArrayElement(trainSetPaths,i);
-        const char* chars=env->GetStringUTFChars(obja,NULL);//将jstring类型转换成char类型输出
-        debug("jniPredict:trainSetPaths cmd = %s", chars);
+        const char* chars=env->GetStringUTFChars(obja, NULL);//将jstring类型转换成char类型输出
+        debug("jniPredict2:trainSetPaths cmd = %s", chars);
+        Mat greymat, colormat;
+        colormat = imread(chars);
+        if(colormat.data) {
+            LOGD("---------------------------------------------- image Loaded");
+            cvtColor(colormat, greymat, CV_BGR2GRAY);
+            images.push_back(greymat);
+        }
         env->ReleaseStringUTFChars(obja, chars);
     }
 
     jint* labs = env->GetIntArrayElements(trainSetLabels,NULL);
     size = env->GetArrayLength(trainSetLabels);
+    vector<int> labels;
     for(int i = 0; i < size; i++) {
-        debug("jniPredict:trainSetLabels cmd = %d", labs[i]);
+        debug("jniPredict2:trainSetLabels cmd = %d", labs[i]);
+        labels.push_back(labs[i]);
     }
 
+    Ptr<FaceRecognizer> model = createLBPHFaceRecognizer();
+    model->train(images, labels);
     size=env->GetArrayLength(predictSetPaths);
+    jintArray jint_arr = env->NewIntArray(size);
+    jint *elems = env->GetIntArrayElements(jint_arr, NULL);
     for(int i = 0; i < size; i++) {
         jstring obja=(jstring)env->GetObjectArrayElement(predictSetPaths,i);
         const char* chars=env->GetStringUTFChars(obja,NULL);//将jstring类型转换成char类型输出
-        debug("jniPredict:predictSetPaths cmd = %s", chars);
+        Mat img = imread(chars, CV_LOAD_IMAGE_GRAYSCALE);
+        int predicted = model->predict(img);
+        debug("jniPredict2:predictSetPaths cmd = %s predicted= %d", chars, predicted);
+        elems[i] = predicted;
         env->ReleaseStringUTFChars(obja, chars);
     }
-
-    Ptr<FaceRecognizer> model2 = createLBPHFaceRecognizer();
-    	// free java object memory
-    //env->ReleaseStringUTFChars(trainPath, cmd);
-    return labs;
+    env->ReleaseIntArrayElements(jint_arr, elems, 0);
+    return jint_arr;
 }
 
 // helper function to be called in Java for making svm-train

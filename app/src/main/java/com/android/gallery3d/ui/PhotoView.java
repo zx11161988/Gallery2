@@ -765,7 +765,10 @@ public class PhotoView extends GLView {
             if (mLoadingState == Model.LOADING_FAIL) {
                 drawLoadingFailMessage(canvas);
             }
-            mFaceManager.drawFace(mModel.getMediaItem(0).getFilePath(), canvas, -r.width() / 2, -r.height() / 2, r.width(), r.height());
+            if (mModel.getMediaItem(0) != null) {
+                mFaceManager.drawFace(mModel.getMediaItem(0).getFilePath(), canvas, -r.width() / 2, -r.height() / 2, r.width(), r.height());
+
+            }
             // Draw a debug indicator showing which picture has focus (index ==
             // 0).
             //canvas.fillRect(-10, -10, 20, 20, 0x80FF00FF);
