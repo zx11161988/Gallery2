@@ -129,10 +129,12 @@ public class FaceAdapter extends BaseAdapter {
     private void initView(ViewHolder holder, int position) {
         final FaceInfo.Info info = mList.get(position);
         holder.faceView.setImageBitmap(getBitmap(info.getFaceThumbNailPath));
-        if (info.mTagByManual) {
-            holder.stateView.setImageResource(R.drawable.btn_shutter_pressed);
+        if (info.mStates == FaceInfo.TAG_MANUAL_CLASSIFICATION) {
+            holder.stateView.setImageResource(R.drawable.tag_yes);
+        } else if(info.mStates == FaceInfo.TAG_AUTO_CLASSIFICATION){
+            holder.stateView.setImageResource(R.drawable.tag_maybe);
         } else {
-            holder.stateView.setImageResource(R.drawable.photoeditor_effect_redeye);
+            holder.stateView.setImageResource(R.drawable.tag_no);
         }
         holder.faceIDName.setText("ID:"+ info.faceID+" "+" \nName:"+info.faceName);
         holder.imageButton.setOnClickListener(new View.OnClickListener() {

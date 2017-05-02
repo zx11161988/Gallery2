@@ -22,6 +22,7 @@ import com.android.gallery3d.face.FaceManager;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Handler;
 
@@ -38,7 +39,6 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
     GalleryAppImpl mGalleryAppImpl;
     FaceManager mFaceManager;
     FaceInfo mFaceInfo;
-    private WeakReference<ProgressDialog> mSavingProgressDialog;
     Svm mClassification;
     Info mInfo;
 
@@ -68,10 +68,7 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.m_fae_save) {
-            String progressText = "Training ......";
-            ProgressDialog progress = ProgressDialog.show(this, "", progressText, true, false);
-            mSavingProgressDialog = new WeakReference<ProgressDialog>(progress);
-            ClassficationTask task = new ClassficationTask(this);
+            ClassficationTask task = new ClassficationTask();
             task.execute();
         }
         return true;
@@ -89,7 +86,7 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
         int length = infoList.size();
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < length; i++) {
-            if (infoList.get(i).mTagByManual) {
+            if (infoList.get(i).mStates == FaceInfo.TAG_MANUAL_CLASSIFICATION) {
                 String facePath = infoList.get(i).getFaceThumbNailPath;
                 list.add(facePath);
                 Log.d(TAG, "<getTrainList> list["+i+"] = " + facePath);
@@ -108,7 +105,7 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
         int length = infoList.size();
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < length; i++) {
-            if (infoList.get(i).mTagByManual) {
+            if (infoList.get(i).mStates == FaceInfo.TAG_MANUAL_CLASSIFICATION) {
                 String facePath = infoList.get(i).faceID;
                 list.add(facePath);
                 Log.d(TAG, "<getTrainLab> list["+i+"] = " + facePath);
@@ -123,12 +120,37 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
         return labs;
     }
 
+    public void autoClassification(int[] tag) {
+        ArrayList<FaceInfo.Info> infoList = mAdapter.getFaceInfoList();
+        int length = infoList.size();
+        ArrayList<FaceInfo.Info> unsignFaceList= new ArrayList<FaceInfo.Info>();
+        HashMap<String, String> faceList = new HashMap<String, String>();
+        for (int i = 0; i < length; i++) {
+            if (infoList.get(i).mStates != FaceInfo.TAG_MANUAL_CLASSIFICATION) {
+                unsignFaceList.add(infoList.get(i));
+            } else if (infoList.get(i).mStates == FaceInfo.TAG_MANUAL_CLASSIFICATION) {
+                faceList.put(infoList.get(i).faceID, infoList.get(i).faceName);
+            }
+        }
+        int taglength = tag.length;
+        int unsingFacelistLength = unsignFaceList.size();
+        assert(taglength == unsingFacelistLength);
+        for (int j = 0 ; j < taglength; j++) {
+            unsignFaceList.get(j).mStates = FaceInfo.TAG_AUTO_CLASSIFICATION;
+            unsignFaceList.get(j).faceID = ""+tag[j];
+            String facename = faceList.get(""+tag[j]);
+            unsignFaceList.get(j).faceName = facename;
+            Log.d(TAG, "<autoClassification> tag["+j+"] = " + tag[j]);
+            Log.d(TAG, "<autoClassification> facename = " + facename);
+        }
+    }
+
     public String[] getPredictList() {
         ArrayList<FaceInfo.Info> infoList = mAdapter.getFaceInfoList();
         int length = infoList.size();
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < length; i++) {
-            if (!infoList.get(i).mTagByManual) {
+            if (infoList.get(i).mStates != FaceInfo.TAG_MANUAL_CLASSIFICATION) {
                 String facePath = infoList.get(i).getFaceThumbNailPath;
                 list.add(facePath);
                 Log.d(TAG, "<getPredictList> list["+i+"] = " + facePath);
@@ -142,18 +164,11 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
         return trainList;
     }
 
-    public void hideSavingProgress() {
-        if (mSavingProgressDialog != null) {
-            ProgressDialog progress = mSavingProgressDialog.get();
-            if (progress != null)
-                progress.dismiss();
-        }
-    }
 
     public class ClassficationTask extends AsyncTask<URL, Integer, Long> {
-        private  FaceListActivity mActivity;
-        public ClassficationTask(FaceListActivity activity) {
-            mActivity = activity;
+        private ProgressDialog mProgressDialog;
+        public ClassficationTask() {
+
         }
         /**
          * Override this method to perform a computation on a background thread. The
@@ -171,24 +186,32 @@ public class FaceListActivity extends FragmentActivity implements FaceAdapter.Cl
          */
         @Override
         protected Long doInBackground(URL... params) {
-            mActivity.getTrainList();
-            mActivity.getTrainLab();
-            mActivity.getPredictList();
             int[] predictLabs = mClassification.onClassfication(
-                    mActivity.getTrainList(),
-                    mActivity.getTrainLab(),
-                    mActivity.getPredictList()
+                    getTrainList(),
+                    getTrainLab(),
+                    getPredictList()
                     );
             for (int i = 0; i < predictLabs.length; i++) {
                 Log.d(TAG, "<doInBackground> predictLabs["+i+"] = "+ predictLabs[i]);
             }
+            autoClassification(predictLabs);
             Log.d(TAG, "doInBackground.....................");
             return null;
         }
+        @Override
+        protected void onPreExecute() {
+            Log.d(TAG, "onPreExecute.....................");
+            String progressText = "Training ......";
+            mProgressDialog = ProgressDialog.show(mContext, "", progressText, true, false);
+        }
 
+        @Override
         protected void onPostExecute(Long result) {
             Log.d(TAG, "onPostExecute.....................");
-            mActivity.hideSavingProgress();
+            if (mProgressDialog != null) {
+                mProgressDialog.dismiss();
+            }
+            mAdapter.notifyDataSetChanged();
         }
     }
 }

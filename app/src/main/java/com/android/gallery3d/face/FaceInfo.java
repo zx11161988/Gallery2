@@ -10,6 +10,9 @@ import java.util.ArrayList;
  * Created by jingxiang wu on 2017/3/11.
  */
 public class FaceInfo {
+    public final static int TAG_UNDO_CLASSIFICATION = 0;
+    public final static int TAG_MANUAL_CLASSIFICATION = 1;
+    public final static int TAG_AUTO_CLASSIFICATION = 2;
     public String mFilePath;
     public String mPath;
     public boolean mHasFace;
@@ -20,7 +23,7 @@ public class FaceInfo {
     public BitmapTexture mFaceTexture;
     public ArrayList<Info> faceLists = new ArrayList<Info>();
     public static class Info {
-        public boolean mTagByManual;
+        public int mStates =TAG_UNDO_CLASSIFICATION ;
         public RectF mRect;
         public String faceID;
         public String faceName;
