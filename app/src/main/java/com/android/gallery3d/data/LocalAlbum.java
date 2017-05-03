@@ -166,7 +166,6 @@ public class LocalAlbum extends MediaSet {
         if (ids.isEmpty()) return result;
         int idLow = ids.get(0);
         int idHigh = ids.get(ids.size() - 1);
-
         // prepare the query parameters
         Uri baseUri;
         String[] projection;
@@ -213,6 +212,11 @@ public class LocalAlbum extends MediaSet {
                         application, isImage);
                 result[i] = item;
                 ++i;
+            }
+            if (ids.size() > 0 && idLow == idHigh) {
+                for (int m = 1; m < ids.size(); m++) {
+                    result[m] = result[0];
+                }
             }
             return result;
         } finally {

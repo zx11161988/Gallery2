@@ -346,4 +346,18 @@ public class LocalImage extends LocalMediaItem {
     public String getFilePath() {
         return filePath;
     }
+
+    @Override
+    public String[] getTags() {
+        return null;
+    }
+
+    private Face[] mfaces = null;
+    @Override
+    public Face[] getFaces() {
+        if (mfaces == null) {
+            mfaces = mApplication.getFaceManager().getFaces(filePath);
+        }
+        return mfaces;
+    }
 }

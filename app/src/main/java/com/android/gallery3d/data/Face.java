@@ -41,6 +41,13 @@ public class Face implements Comparable<Face> {
         }
     }
 
+    public Face(String name, String personId, Rect rect) {
+        mName = name;
+        mPersonId = personId;
+        Utils.assertTrue(mName != null && mPersonId != null && rect != null);
+        mPosition = rect;
+    }
+
     public Rect getPosition() {
         return mPosition;
     }
